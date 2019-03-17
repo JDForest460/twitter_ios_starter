@@ -70,4 +70,38 @@ class TwitterAPICaller: BDBOAuth1SessionManager {
         }, failure: { (tasks: URLSessionDataTask?, error: Error) in failure(error)
         })
     }
+    
+    func favoriteTweet(tweetId:Int, success: @escaping () -> (), failure: @escaping (Error) -> ()){
+        let url = "https://api.twitter.com/1.1/favorites/create.json"
+        TwitterAPICaller.client?.post(url, parameters: ["id":tweetId], progress: nil,
+                                      success: { (task: URLSessionDataTask, response: Any?) in success()
+        }, failure: { (tasks: URLSessionDataTask?, error: Error) in failure(error)
+        })
+    }
+    func unfavoriteTweet(tweetId:Int, success: @escaping () -> (), failure: @escaping (Error) -> ()){
+        let url = "https://api.twitter.com/1.1/favorites/destroy.json"
+        TwitterAPICaller.client?.post(url, parameters: ["id":tweetId], progress: nil,
+                                      success: { (task: URLSessionDataTask, response: Any?) in success()
+        }, failure: { (tasks: URLSessionDataTask?, error: Error) in failure(error)
+        })
+    }
+    func retweet(tweetId:Int, success: @escaping () -> (), failure: @escaping (Error) -> ()){
+        let url = "https://api.twitter.com/1.1/statuses/retweet/\(tweetId).json"
+        TwitterAPICaller.client?.post(url, parameters: ["id":tweetId], progress: nil,
+                                      success: { (task: URLSessionDataTask, response: Any?) in
+                                      success()
+        }, failure: { (tasks: URLSessionDataTask?, error: Error) in
+            failure(error)
+        })
+    }
+    func unretweet(tweetId:Int, success: @escaping () -> (), failure: @escaping (Error) -> ()){
+        let url = "https://api.twitter.com/1.1/statuses/unretweet/\(tweetId).json"
+        TwitterAPICaller.client?.post(url, parameters: ["id":tweetId], progress: nil,
+                                      success: { (task: URLSessionDataTask, response: Any?) in
+                                        success()
+        }, failure: { (tasks: URLSessionDataTask?, error: Error) in
+            failure(error)
+        })
+    }
+    
 }
