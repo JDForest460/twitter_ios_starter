@@ -12,6 +12,8 @@ class HomeTableViewController: UITableViewController {
     
     var tweetArray = [NSDictionary]()
     var numberOFTweet: Int!
+    var numberOFlike: Int!
+    var numberOFretweet: Int!
     let myRefershControl = UIRefreshControl()
     
     override func viewDidLoad() {
@@ -98,6 +100,12 @@ class HomeTableViewController: UITableViewController {
         cell.setFavorite(tweetArray[indexPath.row]["favorited"] as! Bool)
         cell.tweetId = tweetArray[indexPath.row]["id"] as! Int
         cell.setRetweeted(tweetArray[indexPath.row]["retweeted"] as! Bool)
+        numberOFlike = tweetArray[indexPath.row]["favorite_count"] as! Int
+        cell.likecount.text = String(numberOFlike)
+        
+        numberOFretweet = tweetArray[indexPath.row]["retweet_count"] as! Int
+        cell.retweetcount.text = String(numberOFretweet)
+        
         return cell
     }
    
